@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './component/login-form/login-form.component';
 import { LoginIndexComponent } from './container/login-index/login-index.component';
 import { LoginRoutingModule } from './login-routing.module';
+import { DataModule } from '../data/data.module';
 
 
 
@@ -12,8 +13,9 @@ import { LoginRoutingModule } from './login-routing.module';
     LoginIndexComponent
   ],
   imports: [
-    LoginRoutingModule, 
-    CommonModule
+    LoginRoutingModule,
+    DataModule,  
+    CommonModule 
   ]
 })
 export class LoginModule { }
