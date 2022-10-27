@@ -10,10 +10,11 @@ export const loginSuccess = createAction(
     '[Login Index] Login Success',
     props<{ user: IUser }>()
 );
-
+    
 export const loginFailure = createAction(
     '[Login Index] Login Failure'
 );
+
 
 
 // export const logout = createAction('[Login Index] Logout');
