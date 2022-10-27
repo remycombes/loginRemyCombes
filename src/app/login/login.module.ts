@@ -4,6 +4,7 @@ import { LoginFormComponent } from './component/login-form/login-form.component'
 import { LoginIndexComponent } from './container/login-index/login-index.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { DataModule } from '../data/data.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { DataModule } from '../data/data.module';
   imports: [
     LoginRoutingModule,
     DataModule,  
-    CommonModule 
+    ReactiveFormsModule, 
+    CommonModule
   ]
 })
 export class LoginModule { }

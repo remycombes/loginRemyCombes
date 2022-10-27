@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+// FORMS
+.form-input-row{position: relative; width: 100%; display: grid; grid-template-columns: 150px auto; padding: 7px 0 7px 0;}
+.form-input-area{ }
+.form-input-area input{display: inline-block; width: 200px; height: 30px; padding:0 5px 0 5px;   }
+.form-error{padding: 7px 0 7px 0; color: red; text-align: left;  }

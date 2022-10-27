@@ -1,1 +1,40 @@
-<p>login-form works!</p>
+<form [formGroup]="loginForm">
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="login">Login</label>
+        </div>
+        <div class="form-input-area">
+            <input type="text" formControlName="login" name="login" id="login" autocomplete="off">
+        </div>
+    </div>
+    <div *ngIf="loginForm.get('login').dirty && loginForm.get('login').errors?.['required']" class="form-error">
+        Login required
+    </div>
+        
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="password">Password</label>
+        </div>
+        <div class="form-input-area">
+            <input type="password" formControlName="password" name="password" id="password"  autocomplete="off">
+        </div>
+    </div>
+
+    <div *ngIf="loginForm.get('password').dirty && loginForm.get('password').errors?.['required']" class="form-error">
+        Password required
+    </div>
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            
+        </div>
+        <div class="form-input-area">
+            <button id="submitButton" (click)="submit()" [disabled]="!this.loginForm.valid">
+                Login
+            </button>
+        </div>
+    </div>
+    
+</form>
