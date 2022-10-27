@@ -5,6 +5,7 @@ import { LoginIndexComponent } from './container/login-index/login-index.compone
 import { LoginRoutingModule } from './login-routing.module';
 import { DataModule } from '../data/data.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginRoutingModule,
     DataModule,  
     ReactiveFormsModule, 
+    SharedModule, 
     CommonModule
   ]
 })
