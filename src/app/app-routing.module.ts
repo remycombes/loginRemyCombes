@@ -4,7 +4,7 @@ import { PageNotFoundComponent } from './shared/component/page-not-found/page-no
 
 const routes: Routes = [
   {
-    path: 'creer',
+    path: 'login',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   { path: '**', component: PageNotFoundComponent }
