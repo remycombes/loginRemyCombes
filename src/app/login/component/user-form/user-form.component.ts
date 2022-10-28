@@ -23,7 +23,7 @@ export class UserFormComponent implements OnInit {
     login: ['', Validators.required], 
     password: ['', Validators.required], 
     name: ['', Validators.required], 
-    email: ['', Validators.required], 
+    email: ['', [Validators.required, Validators.email]], 
     locationX: [''], 
     locationY: ['']
   }); 

@@ -1,41 +1,40 @@
-User details
-<div *ngIf="user">
+<div class="user-page-title">
+    <h3>User details</h3>
+</div>
 
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="login">Login</label>
-        </div>
-        <div class="form-input-area">
-            {{user.login}}
-        </div>
-    </div>
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="login">Name</label>
-        </div>
-        <div class="form-input-area">
-            {{user.name}}
-        </div>
-    </div>
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="login">Email</label>
-        </div>
-        <div class="form-input-area">
-            {{user.email}}
-        </div>
-    </div>
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="login">Location</label>
-        </div>
-        <div class="form-input-area">
-            {{user.location}}
-        </div>
-    </div>
+<div class="row">
+    <div class="topic">Login</div>
+    <div class="value">{{user.login}}</div>
+</div>
 
-    <div class="form-input-row">
-        <button (click)="clickEdit()">Edit user</button>
+<mat-divider></mat-divider>
+
+<div class="row">
+    <div class="topic">Name</div>
+    <div class="value">{{user.name}}</div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="row">
+    <div class="topic">Email</div>
+    <div class="value">{{user.email}}</div>
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="row">
+    <div class="topic">Location</div>
+    <div class="value">
+        <app-map></app-map>
+
+
     </div>
-    
+</div>
+
+<mat-divider></mat-divider>
+
+<div class="row">
+    <div class="topic"></div>
+    <div class="value"><button mat-raised-button (click)="clickEdit()">Edit user</button></div>
 </div>

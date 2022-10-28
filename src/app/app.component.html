@@ -3,7 +3,8 @@
     <span>{{title}}</span>
     <span class="example-spacer"></span>
     <ng-container *ngIf="(user$ | async) as user">
-      {{user.name}} - {{user.email}}
+      {{user.name}} 
+      <mat-icon aria-hidden="false" aria-label="close" fontIcon="close" color="white" (click)="disconnect()"></mat-icon>
     </ng-container>
     <ng-container *ngIf="!(user$ | async) as user">
       disconnected

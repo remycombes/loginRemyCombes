@@ -1,0 +1,19 @@
+.user-form{position: relative; margin: 30px auto 0 auto; width: 400px; }
+
+.full-width{width:100%;}
+
+.button-area{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.button-area div{position: relative; text-align: center;}
+
+.full-width-button{position: relative; width: 130px; margin: 0 auto 0  auto;}
+
+.map-area{position: relative;}
+.map {width: 100%; height: 100%;}
+
+.submit-area{position: relative; width: 100%; padding: 15px; }
+
+

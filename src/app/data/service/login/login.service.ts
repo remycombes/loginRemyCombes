@@ -24,7 +24,7 @@ export class LoginService {
 
   public login(login: string, password: string) : Observable<IUser>{
     let user: IUser = this.USER_LIST.find((user)=>{
-      return(user.login===login && password===password)
+      return(user.login===login && user.password===password)
     }); 
     if(user){return of(user).pipe(delay(2000));}
     return throwError(()=>{new Error('login error');}); 

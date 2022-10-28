@@ -4,11 +4,30 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule, MatToolbarModule, MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule],
-  exports: [MatToolbarModule, MatIconModule, MatButtonModule, MatInputModule, MatFormFieldModule],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+  ],
+  exports: [
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+  ],
 })
 export class MaterialModule {}

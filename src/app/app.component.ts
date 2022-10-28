@@ -2,6 +2,7 @@ import { Component }    from '@angular/core';
 import { Store }        from '@ngrx/store';
 import { Observable }   from 'rxjs';
 import { IUser }        from 'src/models';
+import { LogoutAction } from './store/auth/auth.actions';
 import { AppState }     from './store/state.model';
 
 @Component({
@@ -20,5 +21,10 @@ export class AppComponent {
   ////////////////////////////////////////////////////////////////////////////////
   constructor(private readonly store: Store<AppState>) { 
     this.user$ = this.store.select((store) => store.auth.user); 
+  }
+
+  public disconnect(): void{
+    this.store.dispatch(new LogoutAction()); 
+
   }
 }

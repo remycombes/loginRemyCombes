@@ -5,12 +5,17 @@
     <app-user-form      *ngIf="user && editMode"        [user]="user" [mode]="'edition'" (editUser)="setEditMode(false);editUser($event)"></app-user-form>
 </ng-container>
 
-<ng-container *ngIf="(loginLoading || editLoading || creationLoading) && !errorMessage">Loading</ng-container>
+<div class="spinner-area" *ngIf="(loginLoading || editLoading || creationLoading) && !errorMessage">
+    <h3>LOADING...</h3> 
+</div>
 
-<ng-container *ngIf="errorMessage">
-    <div>{{errorMessage}}</div>
-    <div><button (click)="logOut()">Return to log in</button></div>
-</ng-container>
+<div class="error-area" *ngIf="errorMessage">
+    <div class="error-message">{{errorMessage}}</div>
+    <br>
+    <div><button mat-raised-button (click)="logOut()">Return to log in</button></div>
+</div>
+
+
 
 
 

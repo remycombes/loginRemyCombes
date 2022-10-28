@@ -1,76 +1,57 @@
-<ng-container *ngIf="mode==='creation'">Create new user</ng-container>
-<ng-container *ngIf="mode==='edition'">Edit user</ng-container>
+<form class="user-form" [formGroup]="userForm">
+    <h3>
+        <ng-container *ngIf="mode==='creation'">Create new user</ng-container>
+        <ng-container *ngIf="mode==='edition'">Edit user</ng-container>
+    </h3>
 
-<form class="form" [formGroup]="userForm">
-    {{mode}}
 
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="login">User name</label>
-        </div>
-        <div class="form-input-area">
-            <input type="text" formControlName="login" name="login" id="login" autocomplete="off">
-        </div>
-    </div>
-    <div *ngIf="userForm.get('login').dirty && userForm.get('login').errors?.['required']" class="form-error">
-        User name required
-    </div>
-        
 
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="password">Password</label>
-        </div>
-        <div class="form-input-area">
-            <input type="password" formControlName="password" name="password" id="password"  autocomplete="off">
-        </div>
-    </div>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>User name</mat-label>
+        <input matInput placeholder="Login" formControlName="login" name="login" id="login" autocomplete="off">
+        <mat-error *ngIf="userForm.get('login').dirty && userForm.get('login').errors?.['required']">
+            User name required
+        </mat-error>
+    </mat-form-field>
 
-    <div *ngIf="userForm.get('password').dirty && userForm.get('password').errors?.['required']" class="form-error">
-        Password required
-    </div>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" matInput placeholder="Password" formControlName="password" name="password" id="password"
+            autocomplete="off">
+        <mat-error *ngIf="userForm.get('password').dirty && userForm.get('password').errors?.['required']">
+            Password required
+        </mat-error>
+    </mat-form-field>
 
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="name">Name</label>
-        </div>
-        <div class="form-input-area">
-            <input type="name" formControlName="name" name="name" id="name"  autocomplete="off">
-        </div>
-    </div>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Full name</mat-label>
+        <input matInput placeholder="Full name" formControlName="name" name="name" id="name" autocomplete="off">
+        <mat-error *ngIf="userForm.get('name').dirty && userForm.get('name').errors?.['required']">
+            Name required
+        </mat-error>
+    </mat-form-field>
 
-    <div *ngIf="userForm.get('name').dirty && userForm.get('name').errors?.['required']" class="form-error">
-        Name required
-    </div>
+    <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email" name="email" id="email" autocomplete="off">
+        <mat-error *ngIf="userForm.get('email').dirty && userForm.get('email').errors?.['required']">
+            Email required
+        </mat-error>
+        <mat-error *ngIf="userForm.get('email').dirty && userForm.get('email').errors?.['email']">
+            Incorect email format
+        </mat-error>
+    </mat-form-field>
 
-    <div class="form-input-row">
-        <div class="form-input-label">
-            <label for="email">Email</label>
-        </div>
-        <div class="form-input-area">
-            <input type="email" formControlName="email" name="email" id="email"  autocomplete="off">
-        </div>
+    <div class="map-area">
+        <app-map height="150px"></app-map>
     </div>
 
-    <div *ngIf="userForm.get('email').dirty && userForm.get('email').errors?.['required']" class="form-error">
-        Password required
+    <div class="submit-area">
+        <button mat-raised-button class="full-width-button" id="submitButton" (click)="submit()"
+            [disabled]="!this.userForm.valid">
+            <ng-container *ngIf="mode==='edition'">Save</ng-container>
+            <ng-container *ngIf="mode==='creation'">Create</ng-container>
+        </button>
     </div>
 
-    <app-map></app-map>
-
-
-
-    <div class="form-input-row">
-        <div class="form-input-label">
-            
-        </div>
-        <div class="form-input-area">
-            <button id="submitButton" (click)="submit()" [disabled]="!this.userForm.valid">
-                <ng-container *ngIf="mode==='edition'">Save</ng-container>
-                <ng-container *ngIf="mode==='creation'">Create</ng-container>
-                
-            </button>
-        </div>
-    </div>
-    
 </form>
