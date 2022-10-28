@@ -1,0 +1,12 @@
+.login-form{position: relative; margin: 30px auto 0 auto; width: 300px; }
+
+.full-width{width:100%;}
+
+.button-area{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.button-area div{position: relative; text-align: center;}
+
+.full-width-button{position: relative; width: 130px; margin: 0 auto 0  auto;}

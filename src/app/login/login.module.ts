@@ -8,6 +8,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { UserFormComponent } from './component/user-form/user-form.component';
 import { UserDetailsComponent } from './component/user-details/user-details.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { UserDetailsComponent } from './component/user-details/user-details.comp
     DataModule,  
     ReactiveFormsModule, 
     SharedModule, 
+    MaterialModule, 
     CommonModule
   ]
 })

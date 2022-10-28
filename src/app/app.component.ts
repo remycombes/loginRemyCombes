@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { IUser } from 'src/models';
-import { AppState } from './store/state.model';
+import { Component }    from '@angular/core';
+import { Store }        from '@ngrx/store';
+import { Observable }   from 'rxjs';
+import { IUser }        from 'src/models';
+import { AppState }     from './store/state.model';
 
 @Component({
   selector: 'app-root',
