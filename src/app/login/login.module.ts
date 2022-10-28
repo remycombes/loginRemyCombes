@@ -7,12 +7,14 @@ import { DataModule } from '../data/data.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { UserFormComponent } from './component/user-form/user-form.component';
+import { UserDetailsComponent } from './component/user-details/user-details.component';
 
 @NgModule({
   declarations: [
     LoginFormComponent,
     LoginIndexComponent,
-    UserFormComponent
+    UserFormComponent,
+    UserDetailsComponent
   ],
   imports: [
     LoginRoutingModule,

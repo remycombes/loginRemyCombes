@@ -6,15 +6,18 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/state.model';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/auth/auth.effects';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    StoreModule.forRoot(reducers), 
     BrowserModule,
     SharedModule,
+    StoreModule.forRoot(reducers), 
+    EffectsModule.forRoot([AuthEffects]),
     AppRoutingModule
   ],
   providers: [],

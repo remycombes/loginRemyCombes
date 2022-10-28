@@ -1,1 +1,62 @@
-<p>user-form works!</p>
+<ng-container *ngIf="mode==='creation'">Create new user</ng-container>
+<ng-container *ngIf="mode==='edition'">Edit user</ng-container>
+
+<form class="form" [formGroup]="userForm">
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="login">User name</label>
+        </div>
+        <div class="form-input-area">
+            <input type="text" formControlName="login" name="login" id="login" autocomplete="off">
+        </div>
+    </div>
+    <div *ngIf="userForm.get('login').dirty && userForm.get('login').errors?.['required']" class="form-error">
+        User name required
+    </div>
+        
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="password">Password</label>
+        </div>
+        <div class="form-input-area">
+            <input type="password" formControlName="password" name="password" id="password"  autocomplete="off">
+        </div>
+    </div>
+
+    <div *ngIf="userForm.get('password').dirty && userForm.get('password').errors?.['required']" class="form-error">
+        Password required
+    </div>
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="email">Email</label>
+        </div>
+        <div class="form-input-area">
+            <input type="email" formControlName="email" name="email" id="email"  autocomplete="off">
+        </div>
+    </div>
+
+    <div *ngIf="userForm.get('email').dirty && userForm.get('email').errors?.['required']" class="form-error">
+        Password required
+    </div>
+
+    <app-map></app-map>
+
+
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            
+        </div>
+        <div class="form-input-area">
+            <button id="submitButton" (click)="submit()" [disabled]="!this.userForm.valid">
+                <ng-container *ngIf="mode==='edition'">Save</ng-container>
+                <ng-container *ngIf="mode==='creation'">Create</ng-container>
+                
+            </button>
+        </div>
+    </div>
+    
+</form>

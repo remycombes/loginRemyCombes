@@ -1,0 +1,41 @@
+User details
+<div *ngIf="user">
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="login">Login</label>
+        </div>
+        <div class="form-input-area">
+            {{user.login}}
+        </div>
+    </div>
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="login">Name</label>
+        </div>
+        <div class="form-input-area">
+            {{user.name}}
+        </div>
+    </div>
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="login">Email</label>
+        </div>
+        <div class="form-input-area">
+            {{user.email}}
+        </div>
+    </div>
+    <div class="form-input-row">
+        <div class="form-input-label">
+            <label for="login">Location</label>
+        </div>
+        <div class="form-input-area">
+            {{user.location}}
+        </div>
+    </div>
+
+    <div class="form-input-row">
+        <button (click)="clickEdit()">Edit user</button>
+    </div>
+    
+</div>

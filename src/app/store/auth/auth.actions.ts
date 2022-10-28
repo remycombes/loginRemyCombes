@@ -12,6 +12,7 @@ export enum AuthActionsTypes {
     EDIT_USER_SUCCESS =     '[LOGIN INDEX] Edit User Success', 
     EDIT_USER_FAILURE =     '[LOGIN INDEX] Edit User Failure', 
     LOGOUT =                '[LOGIN INDEX] Logout',
+    CLEAR_ERROR =           '[LOGIN INDEX] Clear error',
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -73,10 +74,17 @@ export class LogoutAction implements Action {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// CLEAR ERROR /////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+export class ClearErrorAction implements Action {
+    readonly type = AuthActionsTypes.CLEAR_ERROR;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // ACTION TYPES ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 export type AuthActions = 
     LoginAction | LoginSuccessAction | LoginFailureAction | 
     AddUserAction | AddUserSuccessAction | AddUserFailureAction |
     EditUserAction | EditUserSuccessAction | EditUserFailureAction | 
-    LogoutAction;
+    LogoutAction | ClearErrorAction;

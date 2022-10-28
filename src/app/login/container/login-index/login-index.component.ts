@@ -3,7 +3,7 @@ import { Store }                          from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { AppState }                       from 'src/app/store/state.model';
 import { IUser }                          from 'src/models';
-import { EditUserAction, LoginAction, LogoutAction }        from 'src/app/store/auth/auth.actions';
+import { ClearErrorAction, EditUserAction, LoginAction, LogoutAction }        from 'src/app/store/auth/auth.actions';
 
 @Component({
   selector: 'app-login-index',
@@ -17,10 +17,14 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
   user$:          Observable<IUser>;
   loginLoading$:  Observable<boolean>; 
   editLoading$:   Observable<boolean>;
-  mode:           string = 'login'; 
+  errorMessage$:  Observable<string>;
+  editMode:       boolean = false; 
 
   // Manuals subscriptions ///////////////////////////////////////////////////////
-  user: IUser;
+  user:           IUser;
+  loginLoading:   boolean; 
+  editLoading:    boolean; 
+  errorMessage:   string; 
 
   // Ubsubscription //////////////////////////////////////////////////////////////
   unsubscription$: Subject<any> = new Subject();
@@ -35,10 +39,20 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
     this.user$          = this.store.select((store) => store.auth.user); 
     this.loginLoading$  = this.store.select((store) => store.auth.isLoadingLogin); 
     this.editLoading$   = this.store.select((store) => store.auth.isLoadingEdit); 
+    this.errorMessage$  = this.store.select((store) => store.auth.errorMessage); 
 
     // MANUAL SUBSCRIPTIONS /////////////////////////////////////////////////////
     this.user$.pipe(takeUntil(this.unsubscription$)).subscribe(
       (user: IUser)=>{this.user = user;}
+    ); 
+    this.loginLoading$.pipe(takeUntil(this.unsubscription$)).subscribe(
+      (isLoading: boolean)=>{this.loginLoading = isLoading;}
+    ); 
+    this.editLoading$.pipe(takeUntil(this.unsubscription$)).subscribe(
+      (isLoading: boolean)=>{this.editLoading = this.editLoading;}
+    ); 
+    this.errorMessage$.pipe(takeUntil(this.unsubscription$)).subscribe(
+      (error: string)=>{this.errorMessage = error;}
     ); 
   }
 
@@ -52,28 +66,26 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
   ////////////////////////////////////////////////////////////////////////////////
   public login(username: string, password: string): void{
     this.store.dispatch(new LoginAction({ username: username, password: password }));
-    this.mode='edit';
   }
 
   public createUser(user: IUser){
     let userToCreate: IUser = {id: '', login: user.name, password: user.password, email: user.email, location: {x: user.location.x, y: user.location.y}}
     this.store.dispatch(new EditUserAction({ oldUser: user, updatedUser: userToCreate}));
-    this.switchMode('read'); 
   }
 
   public editUser(user: IUser, username: string, password: string, email: string, locationX: number, locationY: number){
     let updatedUser: IUser = {id: user.id, login: username, password: password, email: email, location: {x: locationX, y: locationY}}
     this.store.dispatch(new EditUserAction({ oldUser: user, updatedUser: updatedUser}));
-    this.switchMode('read'); 
   }
 
-  public logout(): void{
+  public logOut(): void{
+    this.store.dispatch(new ClearErrorAction());
     this.store.dispatch(new LogoutAction());
-    this.switchMode('login'); 
+    this.setEditMode(false);
   }
 
-  public switchMode(mode: string){
-    this.mode = mode; 
+  public setEditMode(value: boolean){
+    this.editMode = value; 
   }
 
 }

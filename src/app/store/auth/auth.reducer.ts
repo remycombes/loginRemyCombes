@@ -1,7 +1,7 @@
-import { createReducer, on } from '@ngrx/store';
-import { FAKE_USERS } from 'src/app/data/service/login/FAKE-DATA';
 import { IUser } from 'src/models';
 import { AuthActions, AuthActionsTypes, LoginAction } from './auth.actions';
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // AUTH STATE //////////////////////////////////////////////////////////////////
@@ -10,12 +10,14 @@ export interface AuthState {
   user: IUser; 
   isLoadingLogin: boolean;
   isLoadingEdit: boolean; 
+  errorMessage: string; 
 }
 
 export const initialState : AuthState = {
   user: null, 
   isLoadingLogin: false, 
-  isLoadingEdit: false
+  isLoadingEdit: false, 
+  errorMessage: ''
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,20 +30,24 @@ export function authReducer(
   switch (action.type) {
     // LOGIN ACTIONS ////////////////////////////////////////////////////////
     case AuthActionsTypes.LOGIN:
-      // return {...state, user: null, isLoadingLogin: true};
-      return {...state, user: FAKE_USERS[0], isLoadingLogin: false};
+      return {...state, user: null, isLoadingLogin: true};
     case AuthActionsTypes.LOGIN_SUCCES:
-        return {...state, user: action.payload.user, isLoadingLogin: false};
+      return {...state, user: action.payload.user, isLoadingLogin: false};
     case AuthActionsTypes.LOGIN_FAILURE:
-        return {...state, user: null, isLoadingLogin: false};
+      return {...state, user: null, isLoadingLogin: false, errorMessage: 'Login failed'};
 
     // EDIT USER ACTIONS ////////////////////////////////////////////////////
     case AuthActionsTypes.EDIT_USER:
-      return {...state, isLoadingEdit: true};
+      // return {...state, isLoadingEdit: true};
+      return {...state, user: action.payload.updatedUser, isLoadingLogin: false};
     case AuthActionsTypes.EDIT_USER_SUCCESS:
         return {...state, user: action.payload.user, isLoadingEdit: false};
     case AuthActionsTypes.EDIT_USER_FAILURE:
-        return {...state, isLoadingEdit: false};
+        return {...state, isLoadingEdit: false, errorMessage: 'User edit failed'};
+
+    // LOGOUT ACTIONS //////////////////////////////////////////////////////
+    case AuthActionsTypes.CLEAR_ERROR:
+        return {...state, errorMessage: ''};
 
     // LOGOUT ACTIONS //////////////////////////////////////////////////////
     case AuthActionsTypes.LOGOUT:
