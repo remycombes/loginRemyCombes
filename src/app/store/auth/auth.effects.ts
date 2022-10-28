@@ -6,7 +6,7 @@ import {
     login, 
     loginSuccess, 
     loginFailure
-} from './user.actions'; 
+} from './auth.actions'; 
 
 import { LoginService } from '../../data/service/login/login.service';
  

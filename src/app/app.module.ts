@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 
 import { StoreModule } from '@ngrx/store';
-import { userReducer } from './store/user/user.reducer';
+import { userReducer } from './store/auth/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 
 
@@ -19,7 +19,9 @@ import { EffectsModule } from '@ngrx/effects';
     BrowserModule,
     SharedModule,
     AppRoutingModule,
-    EffectsModule.forRoot([]), 
+    EffectsModule.forRoot({
+      user: authReducer
+    }), 
   ],
   providers: [],
   bootstrap: [AppComponent]

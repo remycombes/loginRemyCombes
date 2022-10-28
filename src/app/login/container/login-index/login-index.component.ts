@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/data/service/login/login.service';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { login } from 'src/app/store/auth/auth.actions';
+import { selectUser } from 'src/app/store/auth/auth.reducer';
 import { IUser } from 'src/models';
 
 @Component({
@@ -9,15 +12,17 @@ import { IUser } from 'src/models';
 })
 export class LoginIndexComponent implements OnInit {
 
-  constructor(private loginService: LoginService) { }
+  user$: Observable<any> = this.store.pipe(map(state=>selectUser(state)));
+
+  constructor(private readonly store: Store<{ login: any }>) { }
 
   user: IUser = null; 
 
   ngOnInit(): void {
-    this.loginService.login('john', 'doe').subscribe((user: IUser)=>{
-      console.log(user); 
-      this.user = user; 
-    }); 
+  }
+
+  public login(username: string, password: string){
+    this.store.dispatch(login({ username: username, password: password }));
   }
 
 }

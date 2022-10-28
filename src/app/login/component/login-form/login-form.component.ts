@@ -35,9 +35,7 @@ export class LoginFormComponent implements OnInit {
       login: this.loginForm.get('login').value, 
       password: this.loginForm.get('password').value, 
     }
-
     this.submitLogin.emit(user); 
-
   }
 
 }
