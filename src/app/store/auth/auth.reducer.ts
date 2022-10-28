@@ -1,8 +1,11 @@
-import { state } from '@angular/animations';
 import { createReducer, on } from '@ngrx/store';
+import { FAKE_USERS } from 'src/app/data/service/login/FAKE-DATA';
 import { IUser } from 'src/models';
-import { AuthActions, AuthActionsTYpes } from './auth.actions';
+import { AuthActions, AuthActionsTypes, LoginAction } from './auth.actions';
 
+////////////////////////////////////////////////////////////////////////////////
+// AUTH STATE //////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 export interface AuthState {
   user: IUser; 
   isLoadingLogin: boolean;
@@ -15,29 +18,33 @@ export const initialState : AuthState = {
   isLoadingEdit: false
 };
 
+////////////////////////////////////////////////////////////////////////////////
+// REDUCER /////////////////////////////////////////////////////////////////////
+
 export function authReducer(
   state: AuthState = initialState,
   action: AuthActions
-) {
+) : AuthState {
   switch (action.type) {
     // LOGIN ACTIONS ////////////////////////////////////////////////////////
-    case AuthActionsTYpes.Login:
-      return {...state, user: null, isLoadingLogin: true};
-    case AuthActionsTYpes.LoginSuccess:
+    case AuthActionsTypes.LOGIN:
+      // return {...state, user: null, isLoadingLogin: true};
+      return {...state, user: FAKE_USERS[0], isLoadingLogin: false};
+    case AuthActionsTypes.LOGIN_SUCCES:
         return {...state, user: action.payload.user, isLoadingLogin: false};
-    case AuthActionsTYpes.LoginFailure:
+    case AuthActionsTypes.LOGIN_FAILURE:
         return {...state, user: null, isLoadingLogin: false};
 
     // EDIT USER ACTIONS ////////////////////////////////////////////////////
-    case AuthActionsTYpes.EditUser:
+    case AuthActionsTypes.EDIT_USER:
       return {...state, isLoadingEdit: true};
-    case AuthActionsTYpes.EditUserSuccess:
+    case AuthActionsTypes.EDIT_USER_SUCCESS:
         return {...state, user: action.payload.user, isLoadingEdit: false};
-    case AuthActionsTYpes.EditUserFailure:
+    case AuthActionsTypes.EDIT_USER_FAILURE:
         return {...state, isLoadingEdit: false};
 
     // LOGOUT ACTIONS //////////////////////////////////////////////////////
-    case AuthActionsTYpes.Logout:
+    case AuthActionsTypes.LOGOUT:
         return {...state, user: null};
 
     // DEFAULT ACTION //////////////////////////////////////////////////////
@@ -45,15 +52,3 @@ export function authReducer(
       return state;
   }
 }
-
-// export const userReducer = createReducer(
-//   initialState,
-//   on(login, (state, {username, password})   => ({...state, isLoading: false})), 
-//   on(loginSuccess, (state, {user})          => ({...state, user: {login: user.login, name: user.name}, isLoading: false})), 
-//   on(loginFailure, (state)                  => ({...state, user: null, isLoading: false}))
-// );
-
-
-// // Selectors
-// export const selectUser         = (state: UserState) => state.user;
-// export const selectUserLoading  = (state: UserState) => state.isLoading;

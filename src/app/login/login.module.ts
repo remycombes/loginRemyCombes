@@ -6,11 +6,13 @@ import { LoginRoutingModule } from './login-routing.module';
 import { DataModule } from '../data/data.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { UserFormComponent } from './component/user-form/user-form.component';
 
 @NgModule({
   declarations: [
     LoginFormComponent,
-    LoginIndexComponent
+    LoginIndexComponent,
+    UserFormComponent
   ],
   imports: [
     LoginRoutingModule,

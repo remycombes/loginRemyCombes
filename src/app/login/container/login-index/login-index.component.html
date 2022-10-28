@@ -1,1 +1,3 @@
-<app-login-form [user]="user" (submitLogin)="login()"></app-login-form>
+<app-login-form *ngIf="mode==='login'" (submitLogin)="login($event.login, $event.password)"></app-login-form>
+<app-user-form *ngIf="mode==='creation'"></app-user-form>
+<app-user-form *ngIf="mode==='edit'"></app-user-form>

@@ -4,24 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
-
 import { StoreModule } from '@ngrx/store';
-import { userReducer } from './store/auth/auth.reducer';
-import { EffectsModule } from '@ngrx/effects';
-
+import { reducers } from './store/state.model';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    StoreModule.forRoot({ count: userReducer }), 
+    StoreModule.forRoot(reducers), 
     BrowserModule,
     SharedModule,
-    AppRoutingModule,
-    EffectsModule.forRoot({
-      user: authReducer
-    }), 
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

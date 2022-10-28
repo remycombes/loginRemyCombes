@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-
-
-
-
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { IUser } from 'src/models';
+import { AppState } from './store/state.model';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +10,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'loginRemyCombes';
+  title:              string                = 'login app';
+  user$:              Observable<IUser>; 
+  loginLoading$:      Observable<boolean>; 
+  editUserLoading$:   Observable<boolean>; 
+
+  ////////////////////////////////////////////////////////////////////////////////
+  // LIFECYCLE ///////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////
+  constructor(private readonly store: Store<AppState>) { 
+    this.user$ = this.store.select((store) => store.auth.user); 
+  }
 }

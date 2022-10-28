@@ -4,7 +4,10 @@ export interface IUser {
     email?:      string; 
     password?:   string;  
     name?:       string;
-    location?:   number; 
+    location?:   {
+        x: number, 
+        y: number
+    }; 
        
 }
 
