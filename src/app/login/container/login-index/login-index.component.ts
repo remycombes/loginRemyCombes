@@ -3,7 +3,7 @@ import { Store }                          from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { AppState }                       from 'src/app/store/state.model';
 import { IUser }                          from 'src/models';
-import { ClearErrorAction, EditUserAction, LoginAction, LogoutAction }        from 'src/app/store/auth/auth.actions';
+import { ClearErrorAction, EditUserAction, LoginAction, LogoutAction, AddUserAction }        from 'src/app/store/auth/auth.actions';
 
 @Component({
   selector: 'app-login-index',
@@ -17,14 +17,16 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
   user$:          Observable<IUser>;
   loginLoading$:  Observable<boolean>; 
   editLoading$:   Observable<boolean>;
+  creationLoading$:   Observable<boolean>;
   errorMessage$:  Observable<string>;
   editMode:       boolean = false; 
 
   // Manuals subscriptions ///////////////////////////////////////////////////////
-  user:           IUser;
-  loginLoading:   boolean; 
-  editLoading:    boolean; 
-  errorMessage:   string; 
+  user:             IUser;
+  loginLoading:     boolean; 
+  editLoading:      boolean; 
+  creationLoading:  boolean; 
+  errorMessage:     string; 
 
   // Ubsubscription //////////////////////////////////////////////////////////////
   unsubscription$: Subject<any> = new Subject();
@@ -36,10 +38,11 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // SELECTIONS ///////////////////////////////////////////////////////////////
-    this.user$          = this.store.select((store) => store.auth.user); 
-    this.loginLoading$  = this.store.select((store) => store.auth.isLoadingLogin); 
-    this.editLoading$   = this.store.select((store) => store.auth.isLoadingEdit); 
-    this.errorMessage$  = this.store.select((store) => store.auth.errorMessage); 
+    this.user$              = this.store.select((store) => store.auth.user); 
+    this.loginLoading$      = this.store.select((store) => store.auth.isLoadingLogin); 
+    this.editLoading$       = this.store.select((store) => store.auth.isLoadingEdit); 
+    this.creationLoading$   = this.store.select((store) => store.auth.isLoadingCreation); 
+    this.errorMessage$      = this.store.select((store) => store.auth.errorMessage); 
 
     // MANUAL SUBSCRIPTIONS /////////////////////////////////////////////////////
     this.user$.pipe(takeUntil(this.unsubscription$)).subscribe(
@@ -48,8 +51,12 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
     this.loginLoading$.pipe(takeUntil(this.unsubscription$)).subscribe(
       (isLoading: boolean)=>{this.loginLoading = isLoading;}
     ); 
+    this.creationLoading$.pipe(takeUntil(this.unsubscription$)).subscribe(
+      (isLoading: boolean)=>{this.creationLoading = isLoading;}
+    ); 
+
     this.editLoading$.pipe(takeUntil(this.unsubscription$)).subscribe(
-      (isLoading: boolean)=>{this.editLoading = this.editLoading;}
+      (isLoading: boolean)=>{this.editLoading = isLoading;}
     ); 
     this.errorMessage$.pipe(takeUntil(this.unsubscription$)).subscribe(
       (error: string)=>{this.errorMessage = error;}
@@ -69,13 +76,11 @@ export class LoginIndexComponent implements OnInit, OnDestroy {
   }
 
   public createUser(user: IUser){
-    let userToCreate: IUser = {id: '', login: user.name, password: user.password, email: user.email, location: {x: user.location.x, y: user.location.y}}
-    this.store.dispatch(new EditUserAction({ oldUser: user, updatedUser: userToCreate}));
+    this.store.dispatch(new AddUserAction({ user: user}));
   }
 
-  public editUser(user: IUser, username: string, password: string, email: string, locationX: number, locationY: number){
-    let updatedUser: IUser = {id: user.id, login: username, password: password, email: email, location: {x: locationX, y: locationY}}
-    this.store.dispatch(new EditUserAction({ oldUser: user, updatedUser: updatedUser}));
+  public editUser(user: IUser){
+    this.store.dispatch(new EditUserAction({ user: user}));
   }
 
   public logOut(): void{

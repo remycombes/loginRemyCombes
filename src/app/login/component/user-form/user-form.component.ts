@@ -13,7 +13,8 @@ export class UserFormComponent implements OnInit {
   ////////////////////////////////////////////////////////////////////////////////
   @Input() user: IUser;
   @Input() mode: string;
-  @Output() submitForm = new EventEmitter<IUser>();
+  @Output() editUser = new EventEmitter<IUser>();
+  @Output() createUser = new EventEmitter<IUser>();
 
   ////////////////////////////////////////////////////////////////////////////////
   // FORM ////////////////////////////////////////////////////////////////////////
@@ -23,8 +24,8 @@ export class UserFormComponent implements OnInit {
     password: ['', Validators.required], 
     name: ['', Validators.required], 
     email: ['', Validators.required], 
-    locationX: ['', Validators.required], 
-    locationY: ['', Validators.required]
+    locationX: [''], 
+    locationY: ['']
   }); 
 
   constructor(private fb: FormBuilder) { }
@@ -36,10 +37,10 @@ export class UserFormComponent implements OnInit {
         password:   this.user.password, 
         name:       this.user.name, 
         email:      this.user.email,  
-        locationX:  this.user.location.x, 
-        locationY:  this.user.location.y, 
-
+        // locationX:  this.user.location.x, 
+        // locationY:  this.user.location.y, 
       })
+      this.userForm.get('login').disable(); 
     }
   }
 
@@ -50,7 +51,16 @@ export class UserFormComponent implements OnInit {
       email:      this.userForm.get('email').value, 
       name:       this.userForm.get('name').value, 
     }
-    this.submitForm.emit(user); 
+    switch (this.mode) {
+      case 'edition':
+        this.editUser.emit(user);
+        break;
+      case 'creation':
+        this.createUser.emit(user);
+        break;
+      default:
+        break;
+    }
 
   }
 

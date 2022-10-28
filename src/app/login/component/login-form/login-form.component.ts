@@ -14,6 +14,7 @@ export class LoginFormComponent implements OnInit {
   // INPUT / OUTPUTS /////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
   @Output() submitLogin = new EventEmitter<IUser>();
+  @Output() createNewUSer = new EventEmitter<IUser>();
 
   ////////////////////////////////////////////////////////////////////////////////
   // FORM ////////////////////////////////////////////////////////////////////////
@@ -39,6 +40,10 @@ export class LoginFormComponent implements OnInit {
       password:   this.loginForm.get('password').value, 
     }
     this.submitLogin.emit(user); 
+  }
+
+  public clickCreate(): void{
+    this.createNewUSer.emit(); 
   }
 
 }

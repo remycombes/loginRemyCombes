@@ -26,6 +26,8 @@
         Password required
     </div>
 
+
+
     <div class="form-input-row">
         <div class="form-input-label">
             
@@ -33,6 +35,17 @@
         <div class="form-input-area">
             <button id="submitButton" (click)="submit()" [disabled]="!this.loginForm.valid">
                 Login
+            </button>
+        </div>
+    </div>
+
+    <div class="form-input-row">
+        <div class="form-input-label">
+            
+        </div>
+        <div class="form-input-area">
+            <button id="createUser" (click)="clickCreate()">
+                Create new user
             </button>
         </div>
     </div>

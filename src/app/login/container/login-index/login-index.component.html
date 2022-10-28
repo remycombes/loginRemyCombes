@@ -1,11 +1,11 @@
-<ng-container *ngIf="!loginLoading && !editLoading && !errorMessage">
+<ng-container *ngIf="!loginLoading && !editLoading &&!creationLoading && !errorMessage">
     <app-user-details   *ngIf="user && !editMode"       [user]="user" (logout)="logOut()" (edit)="setEditMode(true)"></app-user-details>
-    <app-login-form     *ngIf="!user && !editMode"      (submitLogin)="login($event.login, $event.password)"></app-login-form>
-    <app-user-form      *ngIf="!user && editMode"        [mode]="'creation'"></app-user-form>
-    <app-user-form      *ngIf="user && editMode"        [user]="user" [mode]="'edition'"></app-user-form>
+    <app-login-form     *ngIf="!user && !editMode"      (submitLogin)="login($event.login, $event.password)" (createNewUSer)="setEditMode(true);"></app-login-form>
+    <app-user-form      *ngIf="!user && editMode"       [mode]="'creation'" (createUser)="setEditMode(false); createUser($event)"></app-user-form>
+    <app-user-form      *ngIf="user && editMode"        [user]="user" [mode]="'edition'" (editUser)="setEditMode(false);editUser($event)"></app-user-form>
 </ng-container>
 
-<ng-container *ngIf="(loginLoading || editLoading) && !errorMessage">Loading</ng-container>
+<ng-container *ngIf="(loginLoading || editLoading || creationLoading) && !errorMessage">Loading</ng-container>
 
 <ng-container *ngIf="errorMessage">
     <div>{{errorMessage}}</div>

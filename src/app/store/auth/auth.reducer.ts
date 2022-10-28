@@ -10,6 +10,7 @@ export interface AuthState {
   user: IUser; 
   isLoadingLogin: boolean;
   isLoadingEdit: boolean; 
+  isLoadingCreation: boolean; 
   errorMessage: string; 
 }
 
@@ -17,6 +18,7 @@ export const initialState : AuthState = {
   user: null, 
   isLoadingLogin: false, 
   isLoadingEdit: false, 
+  isLoadingCreation: false, 
   errorMessage: ''
 };
 
@@ -36,10 +38,17 @@ export function authReducer(
     case AuthActionsTypes.LOGIN_FAILURE:
       return {...state, user: null, isLoadingLogin: false, errorMessage: 'Login failed'};
 
+    // ADD USER ACTIONS ////////////////////////////////////////////////////
+    case AuthActionsTypes.ADD_USER:
+      return {...state, isLoadingCreation: true};
+    case AuthActionsTypes.ADD_USER_SUCCESS:
+        return {...state, user: action.payload.user, isLoadingCreation: false};
+    case AuthActionsTypes.ADD_USER_FAILURE:
+        return {...state, isLoadingCreation: false, errorMessage: 'User creation failed'};
+
     // EDIT USER ACTIONS ////////////////////////////////////////////////////
     case AuthActionsTypes.EDIT_USER:
-      // return {...state, isLoadingEdit: true};
-      return {...state, user: action.payload.updatedUser, isLoadingLogin: false};
+      return {...state, isLoadingEdit: true};
     case AuthActionsTypes.EDIT_USER_SUCCESS:
         return {...state, user: action.payload.user, isLoadingEdit: false};
     case AuthActionsTypes.EDIT_USER_FAILURE:

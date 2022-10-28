@@ -54,7 +54,7 @@ export class AddUserFailureAction implements Action {
 ////////////////////////////////////////////////////////////////////////////////
 export class EditUserAction implements Action {
     readonly type = AuthActionsTypes.EDIT_USER;
-    constructor(public payload: {oldUser: IUser, updatedUser: IUser}) {}
+    constructor(public payload: {user: IUser}) {}
 }
 
 export class EditUserSuccessAction implements Action {
